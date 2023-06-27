@@ -1,0 +1,84 @@
+/* the props */
+@import 'https://unpkg.com/open-props';
+/* optional imports that use the props */
+@import 'https://unpkg.com/open-props/normalize.min.css';
+@import 'https://unpkg.com/open-props/buttons.min.css';
+
+main {
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+}
+
+dialog {
+  display: grid;
+  align-content: start;
+  background: var(--surface-2);
+  color: var(--text-1);
+  max-inline-size: min(90vw, var(--size-content-3));
+  max-block-size: min(80vh, 100%);
+  max-block-size: min(80dvb, 100%);
+  margin: auto;
+  padding: 0;
+  position: fixed;
+  inset: 0;
+  border-radius: var(--radius-3);
+  box-shadow: var(--shadow-6);
+  z-index: 999;
+  overflow: hidden;
+  transition: opacity 0.5s var(--ease-3);
+}
+
+dialog > form > header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+dialog > form > header > button {
+  border-radius: var(--radius-round);
+  padding: 0.75ch;
+  aspect-ratio: 1;
+  flex-shrink: 0;
+  place-items: center;
+  stroke: currentColor;
+  stroke-width: 3px;
+}
+
+dialog::backdrop {
+  backdrop-filter: none;
+}
+
+dialog:not([open]) {
+  pointer-events: none;
+  opacity: 0;
+}
+
+dialog::backdrop {
+  transition: backdrop-filter 0.5s ease;
+}
+
+dialog > form {
+  padding: 1rem;
+}
+
+dialog > form > * + * {
+  margin-top: 1em;
+}
+
+@media (prefers-color-scheme: dark) {
+  dialog {
+    border-block-start: var(--border-size-1) solid var(--surface-3);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  dialog {
+    animation: var(--animation-scale-down) forwards;
+    animation-timing-function: var(--ease-squish-3);
+  }
+
+  dialog[open] {
+    animation: var(--animation-slide-in-up) forwards;
+  }
+}
